@@ -1,7 +1,7 @@
 # cliente
 
 # dependencies
-/cliente/node_modules
+/cliente/node_modules cliente
 /.pnp
 .pnp.js
 
