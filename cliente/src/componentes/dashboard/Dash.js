@@ -1,32 +1,34 @@
-import logo from '../../assets/logoCTC.png'
-import { Link } from 'react-router-dom'
+
 const Dash = () => {
     return (
-            <div className="page-wrapper chiller-theme toggled">
-                <a id="show-sidebar" className="btn btn-sm btn-dark" href="#">
-                    <i className="fas fa-bars"></i>
-                </a>
-                <div id="sidebar" className="sidebar-wrapper">
-                    <div className="sidebar-content">
-                        <div className="navbar-brand">
-                            <Link className="logo-container" to="/">
-                                    <img src={logo} width="70" height="70" alt="CTC Logo"/>
-                            </Link>
-                            <Link class="navbar-item" to="/"><p className="navbar-title">CTC</p></Link>
-                        </div>
-                        <div className="sidebar-menu">
-                            <ul>
-                                <li className="header-menu">
-                                    <span>Extra</span>
-                                </li>
-                                <li>
-                                    <a href="#"><span>Documentation</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <aside className="menu">
+        <p className="menu-label">
+          General
+        </p>
+        <ul className="menu-list">
+          <li><a>Dashboard</a></li>
+          <li><a>Customers</a></li>
+        </ul>
+        <p className="menu-label">
+          Administration
+        </p>
+        <ul className="menu-list">
+          <li><a>Team Settings</a></li>
+          <li>
+          </li>
+          <li><a>Invitations</a></li>
+          <li><a>Cloud Storage Environment Settings</a></li>
+          <li><a>Authentication</a></li>
+        </ul>
+        <p className="menu-label">
+          Transactions
+        </p>
+        <ul className="menu-list">
+          <li><a>Payments</a></li>
+          <li><a>Transfers</a></li>
+          <li><a>Balance</a></li>
+        </ul>
+      </aside>
     )
 }
 
