@@ -1,6 +1,7 @@
-import React from 'react'
+import '../assets/stylesheets/header.css'
+
 import Button from './utils/Button'
-import logo from '../assets/logoCTC.png'
+import logo from '../assets/images/logoCTC.png'
 import { Link } from 'react-router-dom'
 
 const Header = () => {
@@ -16,7 +17,7 @@ const Header = () => {
                     <div className="navbar-end">
                         <div className="navbar-item">
                             <div className="buttons">
-                               <Button text="Cerrar Sesión"/>
+                               <Button url="/" text="Cerrar Sesión"/>
                             </div>
                         </div>
                     </div>

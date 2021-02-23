@@ -1,0 +1,14 @@
+.graph-content{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  min-width: 100vw;
+  min-height: 100vh;
+  max-height: 120vh;
+}
+  
+.box-content{
+  grid-column: auto;
+  grid-row: 1 / 13;
+}
+  

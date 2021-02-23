@@ -1,0 +1,108 @@
+.SignUp-content{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+  
+    min-width: 100vw;
+    min-height: 100vh;
+    background-image: url("../images/bg-signup.png");
+    background-size: cover;
+}
+
+.SignUp-box{
+    grid-column: 3 / 11;
+    grid-row: 2 / 12;
+    background: rgba(173, 201, 139, 0.8);
+    mix-blend-mode: normal;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+
+}
+
+
+.SignUp-title{
+    text-align: center;
+    grid-column: 2 / 12;
+    grid-row: 2 / 3;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+}
+
+
+.SignUp-form{
+    grid-column: 2 / 12;
+    grid-row: 4 / 12;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    row-gap: 10px;
+    overflow: hidden;
+
+}
+
+.SignUp-form >input{
+    background: inherit;
+    background: transparent;
+    border: none;
+    padding-top: 20px;
+    border-bottom: 1px solid #000000;
+    outline: none;
+}
+
+.SignUp-form >input::placeholder{
+    color: #1e212d;
+}
+
+.SignUp-form >input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px rgba(173, 201, 139, 0.8) inset;
+}
+
+
+.in-user{
+    grid-column: 2 / 6;
+    grid-row: 1 / 2;
+}
+.in-mail{
+    grid-column: 7 / 12;
+    grid-row: 1 / 2;
+}
+.in-name{
+    grid-column: 2 / 12;
+    grid-row: 2 / 3;
+}
+.in-curp{
+    grid-column: 2 / 6;
+    grid-row: 3 / 4;
+}
+.in-rfc{
+    grid-column: 7 / 12;
+    grid-row: 3 / 4;
+}
+.in-password{
+    grid-column: 2 / 6;
+    grid-row: 4 / 5;
+}
+.in-confirm-password{
+    grid-column: 7 / 12;
+    grid-row: 4 / 5;
+}
+.in-phone{
+    grid-column: 2 / 6;
+    grid-row: 5 / 6;
+}
+
+.btn-form{
+    grid-column: 2 / 12;
+    grid-row: 7 / 8;
+    background: #F4F9F9;
+    font-weight: bold;
+    text-align: center;
+    font-size: 13px;
+    line-height: 30px;
+    border-radius: 5px;
+  
+    color: rgba(29, 27, 27, 0.659);
+}

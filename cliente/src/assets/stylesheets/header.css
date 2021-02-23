@@ -1,0 +1,12 @@
+.logo-container {
+    width: 80px;
+    height: 80px;
+    margin-top: 0.8vw;
+    margin-left: 2vw;
+}
+
+.navbar-title {
+    font-size: xx-large;
+    font-weight: bold;
+    color: black;
+}

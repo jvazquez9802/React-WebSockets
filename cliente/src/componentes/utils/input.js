@@ -1,7 +1,7 @@
 
 const input = (props) => {
     return (
-    <input className={props.styleClass} type={props.type} placeholder={props.placeholder}/>
+    <input className={props.styleClass} type={props.type} placeholder={props.placeholder} autocomplete="off" required/>
     )
 }
 

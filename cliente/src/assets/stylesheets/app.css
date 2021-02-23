@@ -1,0 +1,18 @@
+.main-content {
+    min-height: 100vh;
+    min-width: 100vw;
+}
+.header-content {
+    min-height: 8vh;
+    margin-right: 1vw;
+    margin-left: auto;
+    background-color: #ADC98B;
+}
+.body-content {
+    min-height: 80vh;
+}
+.footer-content {
+    position: absolute;
+    min-height: 7vh;
+    min-width: 100vw;
+}

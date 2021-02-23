@@ -1,0 +1,10 @@
+.box-side{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    margin-right: 1vw;
+    grid-column: 1 / 4;
+    grid-row: 1 / 13;
+    display: grid;
+    background-color: #ADC98B;
+  }
