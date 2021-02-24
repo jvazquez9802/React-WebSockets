@@ -1,5 +1,7 @@
 import io from "socket.io-client";
 
-let socket = io("//localhost:5000");
+let socket = io('http://localhost:5000', {
+    transports: ['websocket', 'polling']
+})
 
 export default socket;

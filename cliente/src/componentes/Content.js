@@ -12,9 +12,7 @@ const Content = ({body}) => {
             {location.pathname !=="/" && location.pathname !== "/registro" &&(
                 <Sidebar />
             )}
-            <div className="box-content">
                 {body}
-            </div>
         </div>
     )
 }

@@ -1,5 +1,7 @@
 
 .home-container{
+    grid-column: 1 / 13;
+    grid-row: 1 / 13;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-gap: 10px;
