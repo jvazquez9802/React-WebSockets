@@ -47,9 +47,10 @@ app.get("/registros/:id", async(req, res) => {
 io.on('connection', client => {
   setInterval(() => {
     os.cpuUsage((cpuPercent) =>{
+      const date = new Date()
       client.emit('cpu', {
-        name: new Date().getSeconds(),
-        value: cpuPercent
+        time: date.getMinutes() + ':' + date.getSeconds(),
+        temp: (cpuPercent * 50).toFixed(2),
       });
     });
   }, 5000);
