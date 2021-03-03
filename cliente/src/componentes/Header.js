@@ -12,7 +12,7 @@ const Header = () => {
                             <Link className="logo-container" to="/">
                                     <img src={logo} width="70" height="70" alt="CTC Logo"/>
                             </Link>
-                            <Link class="navbar-item" to="/"><p className="navbar-title">STCC</p></Link>
+                            <Link className="navbar-item" to="/"><p className="navbar-title">STCC</p></Link>
                         </div>
                     <div className="navbar-end">
                         <div className="navbar-item">

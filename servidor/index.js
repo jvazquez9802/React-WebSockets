@@ -30,12 +30,22 @@ app.get("/registros", async(req, res) => {
   }
 });
 
+app.get("/registros/temperatura", async(req, res) => {
+  try {
+    const allRegistros = await pool.query("SELECT temperatura FROM registro");
+    res.json(allRegistros.rows);
+    console.log(allRegistros)
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 app.get("/registros/:id", async(req, res) => {
   try {
     const {id} = req.params;
     const registro = await pool.query("SELECT * FROM registro WHERE registro_id = $1", [id]);
 
-    res.json(registro,rows[0]);
+    res.json(registro.rows[0]);
 
   } catch (err) {
     console.error(err.message);
@@ -50,7 +60,7 @@ io.on('connection', client => {
       const date = new Date()
       client.emit('cpu', {
         time: date.getMinutes() + ':' + date.getSeconds(),
-        temp: (cpuPercent * 50).toFixed(2),
+        temperatura: (cpuPercent * 50).toFixed(2),
       });
     });
   }, 5000);

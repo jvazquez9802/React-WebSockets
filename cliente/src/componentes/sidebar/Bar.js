@@ -12,11 +12,11 @@ const Bar = () => {
     return (
         <aside className="box-side">
         <SideButton image={temperature} text="Temperatura" url="/temperatura"/>
-        <SideButton image={humidity} text="Humedad"/>
-        <SideButton image={wind} text="Dirección del viento"/>
-        <SideButton image={pressure} text="Presión"/>
-        <SideButton image={sun} text="Radiación solar"/>
-        <SideButton image={cloud} text="Precipitación"/>
+        <SideButton image={humidity} text="Humedad" url="/"/>
+        <SideButton image={wind} text="Dirección del viento" url="/"/>
+        <SideButton image={pressure} text="Presión" url="/"/>
+        <SideButton image={sun} text="Radiación solar" url="/"/>
+        <SideButton image={cloud} text="Precipitación" url="/"/>
       </aside>
     )
 }

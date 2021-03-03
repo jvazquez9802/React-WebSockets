@@ -15,6 +15,17 @@ const Temperature = ({}) => {
     
 
     //1.- Listen for a cpu event and update the state
+
+    const getData = async () => {
+        try {
+            const response = await fetch("http://localhost:5000/registros/temperatura");
+            const jsonData = await response.json();
+            setData(jsonData);
+        } catch (err) {
+            console.error(err.message)
+        }
+    };
+
     const getDate = () =>{
         let currentDate = new Date()
         let day = currentDate.getDate()
@@ -30,12 +41,14 @@ const Temperature = ({}) => {
     }
 
     useEffect(() =>{
+        getData()
         socket.on('cpu', (cpuPercent) =>{
             setData(currentData => [...currentData, cpuPercent])
-            setCurrent(cpuPercent['temp'])
+            console.log(data)
+            setCurrent(cpuPercent['temperatura'])
             if (current > max) {
                 setMax(current)
-            } else if(current['temp'] < min){
+            } else if(current['temperatura'] < min){
                 setMin(current)
             }
         })
@@ -65,7 +78,7 @@ const Temperature = ({}) => {
                     />
                     <Tooltip />
                     <CartesianGrid stroke="#eee" strokeDasharray="1" />
-                    <Line yAxisId={2} type="monotone" dataKey="temp" stroke="black" />
+                    <Line yAxisId={2} type="monotone" dataKey="temperatura" stroke="black" />
                 </LineChart>
 
                 </div>
