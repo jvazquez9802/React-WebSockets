@@ -60,7 +60,7 @@ io.on('connection', client => {
       const date = new Date()
       client.emit('cpu', {
         time: date.getMinutes() + ':' + date.getSeconds(),
-        temperatura: (cpuPercent * 50).toFixed(2),
+        temperatura: parseFloat((cpuPercent * 50).toFixed(2)),
       });
     });
   }, 5000);

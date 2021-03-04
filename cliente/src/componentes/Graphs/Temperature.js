@@ -8,24 +8,41 @@ import socket from '../Socket'
 const Temperature = ({}) => {
 
     const [data, setData] = useState([])
-    const [min, setMin] = useState(0)
-    const [max, setMax] = useState(0)
     const [date,setDate] = useState('')
     const [current, setCurrent] = useState(0)
-    
-
+    const [max, setMax] = useState(0)
+    const [min, setMin] = useState(0)    
+    const [first, setFirst] = useState(true)
     //1.- Listen for a cpu event and update the state
+
+    const getMinMax = (object) => {
+        let tmax = object[0].temperatura
+        let tmin = object[0].temperatura
+        object.forEach(element => {
+            if(element.temperatura > tmax){
+                tmax = element.temperatura
+            }
+            if(element.temperatura < tmin){
+                tmin = element.temperatura
+            }
+        });
+
+        setMin(tmin)
+        setMax(tmax)
+    }
+
 
     const getData = async () => {
         try {
             const response = await fetch("http://localhost:5000/registros/temperatura");
             const jsonData = await response.json();
             setData(jsonData);
+            getMinMax(jsonData)
         } catch (err) {
             console.error(err.message)
         }
     };
-
+    
     const getDate = () =>{
         let currentDate = new Date()
         let day = currentDate.getDate()
@@ -39,22 +56,29 @@ const Temperature = ({}) => {
             setDate(`${day}-${month}-${year} : ${hour}`)
         }
     }
+    
+    useEffect(() => {
+        getData()
+        console.log(data)
+    }, [first])
 
     useEffect(() =>{
-        getData()
         socket.on('cpu', (cpuPercent) =>{
             setData(currentData => [...currentData, cpuPercent])
-            console.log(data)
-            setCurrent(cpuPercent['temperatura'])
-            if (current > max) {
-                setMax(current)
-            } else if(current['temperatura'] < min){
-                setMin(current)
-            }
+            setCurrent(cpuPercent.temperatura)
         })
         
         getDate()
     }, [])
+
+    useEffect(() =>{
+        let valor = current
+        if(valor > max){
+            setMax(valor)
+        } else if(valor < min){
+            setMin(valor)
+        }
+    }, [current])
 
     //2.- Render the line chart using the state
 
