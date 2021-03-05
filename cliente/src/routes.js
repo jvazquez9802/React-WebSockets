@@ -1,7 +1,6 @@
   
 import React, {Component} from 'react';
 import { Route, Switch } from 'react-router-dom';
-
 import page404 from './componentes/error/Page404'
 import App from './componentes/App'
 import Home from './componentes/pages/Home'
