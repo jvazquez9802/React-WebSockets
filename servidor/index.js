@@ -57,10 +57,14 @@ app.get("/registros/:id", async(req, res) => {
 io.on('connection', client => {
   setInterval(() => {
     os.cpuUsage((cpuPercent) =>{
-      const date = new Date()
       client.emit('cpu', {
-        time: date.getMinutes() + ':' + date.getSeconds(),
+        fecha: "2021-02-12T06:00:00.000Z",
+        humedad: parseFloat((cpuPercent * 10).toFixed(2)),
+        precipitacion: parseFloat((cpuPercent * 15).toFixed(2)),
+        presion: parseFloat((cpuPercent * 20).toFixed(2)),
+        radiacion: parseFloat((cpuPercent * 25).toFixed(2)),
         temperatura: parseFloat((cpuPercent * 50).toFixed(2)),
+        viento: parseFloat((cpuPercent * 30).toFixed(2)),
       });
     });
   }, 5000);

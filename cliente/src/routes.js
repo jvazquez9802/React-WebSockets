@@ -8,7 +8,7 @@ import Home from './componentes/pages/Home'
 import SignUp from './componentes/pages/SignUp'
 import list from './componentes/ListRegistry'
 import chat from './componentes/Chat'
-import Temperatura from './componentes/Graphs/Temperature'
+import Container from './componentes/Graphs/Container';
 
 class AppRoutes extends Component{
     render() {
@@ -18,7 +18,13 @@ class AppRoutes extends Component{
                     <Route exact path = '/' component = {Home} />
                     <Route exact path = '/registro' component = {SignUp} />
                     <Route exact path = '/lista' component = {list} />
-                    <Route exact path = '/temperatura' component = {Temperatura} />
+                    <Route exact path = '/info' component = {Container} />
+                    <Route exact path = '/info/temperatura' component = {Container} />
+                    <Route exact path = '/info/humedad' component = {Container} />
+                    <Route exact path = '/info/viento' component = {Container} />
+                    <Route exact path = '/info/presion' component = {Container} />
+                    <Route exact path = '/info/radiacion' component = {Container} />
+                    <Route exact path = '/info/precipitacion' component = {Container} />
                     <Route exact path = '/chat' component = {chat} />
                     <Route component = {page404} />
                 </Switch>

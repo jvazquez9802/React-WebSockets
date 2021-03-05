@@ -11,12 +11,12 @@ import cloud from '../../assets/images/img-cloud.png'
 const Bar = () => {
     return (
         <aside className="box-side">
-        <SideButton image={temperature} text="Temperatura" url="/temperatura"/>
-        <SideButton image={humidity} text="Humedad" url="/"/>
-        <SideButton image={wind} text="Dirección del viento" url="/"/>
-        <SideButton image={pressure} text="Presión" url="/"/>
-        <SideButton image={sun} text="Radiación solar" url="/"/>
-        <SideButton image={cloud} text="Precipitación" url="/"/>
+        <SideButton image={temperature} text="Temperatura" url="/info/temperatura"/>
+        <SideButton image={humidity} text="Humedad" url="/info/humedad"/>
+        <SideButton image={wind} text="Dirección del viento" url="/info/viento"/>
+        <SideButton image={pressure} text="Presión" url="/info/presion"/>
+        <SideButton image={sun} text="Radiación solar" url="/info/radiacion"/>
+        <SideButton image={cloud} text="Precipitación" url="/info/precipitacion"/>
       </aside>
     )
 }
