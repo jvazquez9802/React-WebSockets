@@ -4,23 +4,33 @@ import { useEffect, useState } from 'react'
 import { Line, LineChart, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts'
 //import socket from '../Socket'
 
-const Graph = ({title, registry, prop, label}) => {
 
-    let [current, setCurrent] = useState(0)
-    let [max, setMax] = useState(0)
-    let [min, setMin] = useState(0)    
-    //1.- Listen for a cpu event and update the state
+const Graph = ({title, registry, prop, label, lastData, pmax, pmin}) => {
+    
+    const [data, setData] = useState(registry)
+    const [max, setMax] = useState(0)
+    const [min, setMin] = useState(0)
+
+    useEffect(() => {
+        setData(registry)
+    })
+
+    useEffect(() => {
+        
+        setMax(pmax(data, prop))
+        setMin(pmin(data, prop))
+    })
 
     return (
         <>
-            <button onClick={() => console.log(registry[0][prop])}>click me babe</button>
+            <button onClick={() => console.log()}>click me babe</button>
             <h1 className="Graph-header">{title}</h1>
-            <h2 className="current-prop">Actual: {current}</h2>
-            <h2 className="min-prop">Mínima: {min}</h2>
-            <h2 className="max-prop">Máxima: {max}</h2>
+            <h2 className="current-prop">Actual: {lastData}</h2>
+            <h2 className="max-prop">Máxima: {data ? max : '0'}</h2>
+            <h2 className="min-prop">Mínima: {data ? min : '0'}</h2>
             <div className="Graph-box">
                 <div className="Graph-inner-box">
-                <LineChart className="Graph" width={800} height={370} data={registry}>
+                <LineChart className="Graph" width={800} height={370} data={data}>
                     <XAxis dataKey="time" angle={-90} dy={10}/>
                     <YAxis 
                         yAxisId={2} 

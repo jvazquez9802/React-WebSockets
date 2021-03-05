@@ -22,19 +22,9 @@ app.use(express.json());
 
 app.get("/registros", async(req, res) => {
   try {
-    const allRegistros = await pool.query("SELECT * FROM registro");
+    const allRegistros = await pool.query("SELECT * FROM (SELECT * FROM registro ORDER BY registro_id DESC LIMIT 24) AS QRY ORDER BY QRY.registro_id");
     console.log(allRegistros)
     res.json(allRegistros.rows);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-app.get("/registros/temperatura", async(req, res) => {
-  try {
-    const allRegistros = await pool.query("SELECT temperatura FROM registro");
-    res.json(allRegistros.rows);
-    console.log(allRegistros)
   } catch (err) {
     console.error(err.message);
   }
