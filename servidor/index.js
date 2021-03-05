@@ -22,19 +22,9 @@ app.use(express.json());
 
 app.get("/registros", async(req, res) => {
   try {
-    const allRegistros = await pool.query("SELECT * FROM registro");
+    const allRegistros = await pool.query("SELECT * FROM (SELECT * FROM registro ORDER BY registro_id DESC LIMIT 24) AS QRY ORDER BY QRY.registro_id");
     console.log(allRegistros)
     res.json(allRegistros.rows);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-app.get("/registros/temperatura", async(req, res) => {
-  try {
-    const allRegistros = await pool.query("SELECT temperatura FROM registro");
-    res.json(allRegistros.rows);
-    console.log(allRegistros)
   } catch (err) {
     console.error(err.message);
   }
@@ -57,10 +47,14 @@ app.get("/registros/:id", async(req, res) => {
 io.on('connection', client => {
   setInterval(() => {
     os.cpuUsage((cpuPercent) =>{
-      const date = new Date()
       client.emit('cpu', {
-        time: date.getMinutes() + ':' + date.getSeconds(),
+        fecha: "2021-02-12T06:00:00.000Z",
+        humedad: parseFloat((cpuPercent * 10).toFixed(2)),
+        precipitacion: parseFloat((cpuPercent * 15).toFixed(2)),
+        presion: parseFloat((cpuPercent * 20).toFixed(2)),
+        radiacion: parseFloat((cpuPercent * 25).toFixed(2)),
         temperatura: parseFloat((cpuPercent * 50).toFixed(2)),
+        viento: parseFloat((cpuPercent * 30).toFixed(2)),
       });
     });
   }, 5000);
