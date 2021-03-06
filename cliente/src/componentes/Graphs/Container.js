@@ -4,6 +4,7 @@ import React from 'react'
 import socket from '../Socket'
 import Graph from './Graph'
 
+
 import { useLocation } from 'react-router-dom'
 
 
@@ -61,7 +62,6 @@ const Container = () => {
     const location = useLocation()
     return (
         <div className="Graph-content">
-           <button onClick={() => console.log(data)}>Click to check</button>
            {location.pathname === "/info/temperatura" &&(
                <Graph 
                title="Temperatura" 
@@ -86,7 +86,7 @@ const Container = () => {
             )}
             {location.pathname === "/info/viento" &&(
                <Graph 
-                    title="viento" 
+                    title="Viento" 
                     registry={data} 
                     prop="viento" 
                     label="Hum" 

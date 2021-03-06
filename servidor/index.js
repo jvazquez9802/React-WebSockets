@@ -54,7 +54,7 @@ io.on('connection', client => {
         presion: parseFloat((cpuPercent * 20).toFixed(2)),
         radiacion: parseFloat((cpuPercent * 25).toFixed(2)),
         temperatura: parseFloat((cpuPercent * 50).toFixed(2)),
-        viento: parseFloat((cpuPercent * 30).toFixed(2)),
+        viento: parseFloat((cpuPercent * 35).toFixed(2)),
       });
     });
   }, 5000);

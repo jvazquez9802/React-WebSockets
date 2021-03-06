@@ -2,7 +2,7 @@ import React from 'react'
 import '../../assets/stylesheets/info.css'
 import { useEffect, useState } from 'react'
 import { Line, LineChart, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts'
-import PropTypes from 'prop-types'
+import Spinner from '../utils/Spinner'
 //import socket from '../Socket'
 
 
@@ -18,12 +18,11 @@ const Graph = ({title, registry, prop, label, lastData, pmax, pmin}) => {
     }, [registry])
 
     if(registry.length == 0){
-        return <h1>empty</h1>
+        return <Spinner/>
     }
 
     return (
         <>
-            <button onClick={() => console.log(registry)}>click me babe</button>
             <h1 className="Graph-header">{title}</h1>
             <h2 className="current-prop">Actual: {lastData ? lastData : 0}</h2>
             <h2 className="max-prop">Máxima: {max} </h2>
@@ -49,27 +48,5 @@ const Graph = ({title, registry, prop, label, lastData, pmax, pmin}) => {
         
     )
 }
-
-Graph.defaultProps = {
-
-}
-
-Graph.defaultProps = {
-    registry: {
-            fecha: 0,
-            humedad: 0,
-            precipitacion: 0,
-            presion: 0,
-            radiacion: 0,
-            registro_id: 0,
-            temperatura: 0,
-            viento: 0
-        },
-}
-
-Graph.propTypes = {
-    registry: PropTypes.object.isRequired,
-}
-
 
 export default Graph
