@@ -19,8 +19,9 @@ const Container = () => {
         try {
             const response = await fetch("http://localhost:5000/registros");
             const jsonData = await response.json();
+            console.log(jsonData)
             setData(jsonData);
-            setCurrent(jsonData)
+            setCurrent(jsonData[jsonData.length - 1])
             //getMinMax(data)
         } catch (err) {
             console.error(err.message)
@@ -52,9 +53,9 @@ const Container = () => {
     }, [change])
 
    useEffect(() =>{
-        socket.on('cpu', (cpuPercent) =>{
-            setData(currentData => [...currentData, cpuPercent])
-            setCurrent(cpuPercent)
+        socket.on('new: data', (c) =>{
+            console.log(c)
+            getData()
         })
     }, [])
 

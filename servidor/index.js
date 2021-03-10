@@ -30,7 +30,7 @@ app.get("/registros", async(req, res) => {
   }
 });
 
-app.get("/registros/:id", async(req, res) => {
+/*app.get("/registros/:id", async(req, res) => {
   try {
     const {id} = req.params;
     const registro = await pool.query("SELECT * FROM registro WHERE registro_id = $1", [id]);
@@ -40,11 +40,28 @@ app.get("/registros/:id", async(req, res) => {
   } catch (err) {
     console.error(err.message);
   }
+});*/
+
+io.on('connection', client => {
+  
+  app.post("/registros/nuevo", async (req, res) => {
+    
+    try{
+      let insertar = await pool.query(`INSERT INTO registro
+      (temperatura, humedad)
+      VALUES
+      ($1, $2)`, [req.body.temperatura, req.body.humedad]).then(() =>{client.emit('new: data', 'La base de datos ha sido actualizada')});
+    } catch (err) {
+      console.error(err.message);
+      return
+    }
+      
+  });
 });
 
 
 //Funcionalidad de socket.io en el servidor
-io.on('connection', client => {
+/*io.on('connection', client => {
   setInterval(() => {
     os.cpuUsage((cpuPercent) =>{
       client.emit('cpu', {
@@ -58,6 +75,6 @@ io.on('connection', client => {
       });
     });
   }, 5000);
-});
+});*/
 
 servidor.listen(5000, () => console.log("Servidor inicializado"));
