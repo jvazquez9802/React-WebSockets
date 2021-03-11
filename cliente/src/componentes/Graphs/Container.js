@@ -4,6 +4,7 @@ import React from 'react'
 import socket from '../Socket'
 import Graph from './Graph'
 
+
 import { useLocation } from 'react-router-dom'
 
 
@@ -18,8 +19,9 @@ const Container = () => {
         try {
             const response = await fetch("http://localhost:5000/registros");
             const jsonData = await response.json();
+            console.log(jsonData)
             setData(jsonData);
-            setCurrent(jsonData)
+            setCurrent(jsonData[jsonData.length - 1])
             //getMinMax(data)
         } catch (err) {
             console.error(err.message)
@@ -51,17 +53,16 @@ const Container = () => {
     }, [change])
 
    useEffect(() =>{
-        socket.on('cpu', (cpuPercent) =>{
-            setData(currentData => [...currentData, cpuPercent])
-            setCurrent(cpuPercent)
+        socket.on('new: data', (c) =>{
+            console.log(c)
+            getData()
         })
-    }, [])
+    }, [data])
 
 
     const location = useLocation()
     return (
         <div className="Graph-content">
-           <button onClick={() => console.log(data)}>Click to check</button>
            {location.pathname === "/info/temperatura" &&(
                <Graph 
                title="Temperatura" 
@@ -86,7 +87,7 @@ const Container = () => {
             )}
             {location.pathname === "/info/viento" &&(
                <Graph 
-                    title="viento" 
+                    title="Viento" 
                     registry={data} 
                     prop="viento" 
                     label="Hum" 

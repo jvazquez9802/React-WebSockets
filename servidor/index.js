@@ -7,7 +7,6 @@ const cors = require("cors");
 const pool = require("./db");
 
 //Mandar info para graficar
-const os = require('os-utils');
 
 
 const socketio = require("socket.io");
@@ -30,7 +29,7 @@ app.get("/registros", async(req, res) => {
   }
 });
 
-app.get("/registros/:id", async(req, res) => {
+/*app.get("/registros/:id", async(req, res) => {
   try {
     const {id} = req.params;
     const registro = await pool.query("SELECT * FROM registro WHERE registro_id = $1", [id]);
@@ -40,11 +39,28 @@ app.get("/registros/:id", async(req, res) => {
   } catch (err) {
     console.error(err.message);
   }
+});*/
+
+io.on('connection', client => {
+  
+  app.post("/registros/nuevo", async (req, res) => {
+    console.log(req.body)
+    try{
+      let insertar = await pool.query(`INSERT INTO registro 
+      (fecha, hora, temperatura, presion, humedad, viento, viento_max, radiacion, precipitacion)
+      VALUES 
+      ('${req.body.fecha}', '${req.body.hora}', ${req.body.temperatura}, ${req.body.presion}, ${req.body.humedad}, ${req.body.viento}, ${req.body.viento_max}, ${req.body.radiacion}, ${req.body.precipitacion});`).then(() =>{client.emit('new: data', 'La base de datos ha sido actualizada')});
+    } catch (err) {
+      console.error(err.message);
+      return
+    }
+      
+  });
 });
 
 
 //Funcionalidad de socket.io en el servidor
-io.on('connection', client => {
+/*io.on('connection', client => {
   setInterval(() => {
     os.cpuUsage((cpuPercent) =>{
       client.emit('cpu', {
@@ -54,10 +70,10 @@ io.on('connection', client => {
         presion: parseFloat((cpuPercent * 20).toFixed(2)),
         radiacion: parseFloat((cpuPercent * 25).toFixed(2)),
         temperatura: parseFloat((cpuPercent * 50).toFixed(2)),
-        viento: parseFloat((cpuPercent * 30).toFixed(2)),
+        viento: parseFloat((cpuPercent * 35).toFixed(2)),
       });
     });
   }, 5000);
-});
+});*/
 
 servidor.listen(5000, () => console.log("Servidor inicializado"));

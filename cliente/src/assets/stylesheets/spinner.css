@@ -1,0 +1,17 @@
+.spinner-box{
+    
+    grid-column: 1 / 13;
+    grid-row: 1 / 13;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+}
+
+.loader-box{
+    grid-column: 6 / 8;
+    grid-row: 6 / 8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
