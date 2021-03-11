@@ -7,7 +7,6 @@ const cors = require("cors");
 const pool = require("./db");
 
 //Mandar info para graficar
-const os = require('os-utils');
 
 
 const socketio = require("socket.io");
