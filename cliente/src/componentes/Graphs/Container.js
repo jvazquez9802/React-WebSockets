@@ -57,7 +57,7 @@ const Container = () => {
             console.log(c)
             getData()
         })
-    }, [])
+    }, [data])
 
 
     const location = useLocation()

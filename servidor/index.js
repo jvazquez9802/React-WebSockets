@@ -45,12 +45,12 @@ app.get("/registros", async(req, res) => {
 io.on('connection', client => {
   
   app.post("/registros/nuevo", async (req, res) => {
-    
+    console.log(req.body)
     try{
-      let insertar = await pool.query(`INSERT INTO registro
-      (temperatura, humedad)
-      VALUES
-      ($1, $2)`, [req.body.temperatura, req.body.humedad]).then(() =>{client.emit('new: data', 'La base de datos ha sido actualizada')});
+      let insertar = await pool.query(`INSERT INTO registro 
+      (fecha, hora, temperatura, presion, humedad, viento, viento_max, radiacion, precipitacion)
+      VALUES 
+      ('${req.body.fecha}', '${req.body.hora}', ${req.body.temperatura}, ${req.body.presion}, ${req.body.humedad}, ${req.body.viento}, ${req.body.viento_max}, ${req.body.radiacion}, ${req.body.precipitacion});`).then(() =>{client.emit('new: data', 'La base de datos ha sido actualizada')});
     } catch (err) {
       console.error(err.message);
       return
