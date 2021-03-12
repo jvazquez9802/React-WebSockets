@@ -6,7 +6,6 @@ import App from './componentes/App'
 import Home from './componentes/pages/Home'
 import SignUp from './componentes/pages/SignUp'
 import list from './componentes/ListRegistry'
-import chat from './componentes/Chat'
 import Container from './componentes/Graphs/Container';
 
 class AppRoutes extends Component{
@@ -24,7 +23,6 @@ class AppRoutes extends Component{
                     <Route exact path = '/info/presion' component = {Container} />
                     <Route exact path = '/info/radiacion' component = {Container} />
                     <Route exact path = '/info/precipitacion' component = {Container} />
-                    <Route exact path = '/chat' component = {chat} />
                     <Route component = {page404} />
                 </Switch>
             </App>
