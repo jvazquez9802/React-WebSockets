@@ -1,15 +1,16 @@
 import '../../assets/stylesheets/home.css'
-import Button from '../utils/Button'
 import { useState } from 'react'
-import md5 from 'md5'
 import { Link } from 'react-router-dom'
 
 
-const Home = () => {
 
+const Home = () => {
+    
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
+    const [loginStatus, setLoginStatus] = useState(false)
+    
+    
     const logIn = async () => {
         try {
             const response = await fetch('http://localhost:5000/signin', {
@@ -20,23 +21,22 @@ const Home = () => {
                 },
                   body: JSON.stringify({
                       email:email,
-                      password:md5(password),
+                      password:password
                   }),
               })
-  
-              const jsonData = await response.json();
-              console.log(jsonData)
+              const found = await response.json();
+              setLoginStatus(found.found)
+              console.log(found)
+
         } catch (err) {
             console.log(err.message)
         }
-
     }
 
     return (
         <div className="home-container">
-
             <div className="home-text">
-                <h1 className="home-header">Bienvenido</h1>
+                <h1 className="home-header">Bienvenido {loginStatus}</h1>
                 <p className="home-p1">Regístrate al STCC</p>
                 <p className="home-p2">Registrándote podrás visualizar las condiciones climatológicas de tu cultivo en tiempo real y recibirás notificaciones en caso de un posible riesgo. </p>
                 <Link className="btn-home-up" to="/registro">Regístrate</Link>

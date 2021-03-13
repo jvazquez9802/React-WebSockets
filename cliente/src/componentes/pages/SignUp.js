@@ -1,6 +1,5 @@
 import '../../assets/stylesheets/signup.css'
 import { useState } from 'react'
-import md5 from 'md5'
 
 
 
@@ -29,7 +28,7 @@ const SignUp = () => {
                         email:email,
                         curp:curp.toUpperCase(),
                         rfc:rfc.toUpperCase(),
-                        password:md5(password),
+                        password:password,
                         phone:phone
                     }),
                 })

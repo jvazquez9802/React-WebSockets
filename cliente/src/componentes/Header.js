@@ -10,7 +10,7 @@ const Header = () => {
                 <div id="navbarBasicExample" className="navbar-menu">
                 <div className="navbar-brand">
                             <Link className="logo-container" to="/">
-                                    <img src={logo} width="70" height="70" alt="CTC Logo"/>
+                                    <img src={logo} width="70" height="70" alt="CTC Logo" href='/'/>
                             </Link>
                             <Link className="navbar-item" to="/"><p className="navbar-title">STCC</p></Link>
                         </div>

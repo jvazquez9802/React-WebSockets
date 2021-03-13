@@ -16,6 +16,10 @@ const io = socketio(servidor, {
 app.use(cors());
 app.use(express.json()); 
 
+const bcrypt = require("bcrypt");
+const saltRounds = 10
+
+
 //Rutas para registros
 
 app.get("/registros", async(req, res) => {
@@ -51,29 +55,41 @@ app.get("/usuarios/:id", async(req, res) => {
 });
 
 app.post("/signup", async(req, res) => {
-  try{
     const data = req.body
-    let newUser = await pool.query(`INSERT INTO usuario 
-    (nombre_usuario, nombre_completo, correo, curp, rfc, contraseña, telefono)
-    VALUES 
-    ('${data.username}', '${data.fullName}', '${data.email}', '${data.curp}', '${data.rfc}', '${data.password}', '${ data.phone}');`).then(() =>{console.log("Registrado")});
-    res.json({message:'Exito en el registro'})
-  } catch (err) {
-    console.error(err.message)
-  }
+    const bcPass = data.password
+    bcrypt.hash(bcPass, saltRounds, async(err, hash) => {
+      if(err){
+        console.log(err);
+      }
+      let newUser = await pool.query(`INSERT INTO usuario 
+      (nombre_usuario, nombre_completo, correo, curp, rfc, contraseña, telefono)
+      VALUES 
+      ('${data.username}', '${data.fullName}', '${data.email}', '${data.curp}', '${data.rfc}', '${hash}', '${data.phone}');`)
+      .then(() =>{console.log("Registrado")});
+      res.json({message:'Exito en el registro'});
+    });
 });
 
 app.post("/signin", async (req, res) => {
   try {
     const data = req.body
-    let login = await pool.query(`SELECT * FROM usuario WHERE correo = '${data.email}' AND contraseña = '${data.password}'`)
+    let login = await pool.query(`SELECT * FROM usuario WHERE correo = '${data.email}'`);
     if(login.rowCount > 0){
-      res.json(login.rows[0])
+      bcrypt.compare(data.password, login.rows[0].contraseña, (err, result) =>{
+        if(result){
+          res.json({found:true, message:"Inicio de sesión exitoso"});
+        } else {
+          res.json({found:false, message:"Contraseña incorrecta"});
+        }
+        if(err){
+          console.log(err)
+        }
+      });
     } else {
-      res.json({message:"Correo electrónico o contraseña no válido"})
+      res.json({found:false, message:"Correo electrónico incorrecto"});
     }
   } catch (err) {
-    res.json({err:err})
+    res.json({err:err});
   }
 });
 

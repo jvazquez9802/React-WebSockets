@@ -1,18 +1,14 @@
 import '../assets/stylesheets/app.css'
 
-import React, { Component, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import Header from './Header'
 import Content from './Content'
 import Footer from './Footer'
-import PropTypes from 'prop-types'
 
-class App extends Component {
-  static propTypes = {
-    children: PropTypes.object.isRequired
-  };
 
-  render() {
-    const {children} = this.props;
+
+const App = ({ children }) => {
+
     return (
       <Fragment>
           <div className="main-content">
@@ -28,7 +24,7 @@ class App extends Component {
           </div>
       </Fragment>
     );
-  }
+  
 }
 
 export default App;

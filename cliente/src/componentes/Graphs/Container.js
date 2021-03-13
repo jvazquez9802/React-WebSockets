@@ -12,7 +12,7 @@ const Container = () => {
 
     const [data, setData] = useState([])
     const [current, setCurrent] = useState({})
-    const [change, setChange] = useState([false])
+    const [change, ] = useState([false])
 
     
     const getData = async () => {
@@ -57,7 +57,7 @@ const Container = () => {
             console.log(c)
             getData()
         })
-    }, [data])
+    }, [])
 
 
     const location = useLocation()
