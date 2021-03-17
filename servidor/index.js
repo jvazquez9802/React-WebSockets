@@ -6,6 +6,8 @@ const servidor = http.createServer(app);
 const cors = require("cors");
 const pool = require("./db");
 
+
+const jwt = require('jsonwebtoken')
 //Uso del socket
 const socketio = require("socket.io");
 const { json } = require("express");
@@ -18,6 +20,7 @@ app.use(express.json());
 
 const bcrypt = require("bcrypt");
 const saltRounds = 10
+
 
 
 //Rutas para registros
@@ -78,14 +81,22 @@ app.post("/login", async (req, res) => {
       bcrypt.compare(data.password, login.rows[0].contraseña, (err, result) =>{
         if(result){
           let qry = login.rows[0]
-          res.json({
+
+          const user = {
             found: true,
+            id: qry.usuario_id,
             username: qry.nombre_usuario,
             name: qry.nombre_completo,
             curp: qry.curp,
             rfc:qry.rfc,
             phone:qry.telefono
-          });
+          }
+
+          jwt.sign(user, 'secretkey', (err, token) => {
+            user.token = token
+            res.json(user);
+          })
+
         } else {
           res.json({found:false, message:"Contraseña incorrecta"});
         }

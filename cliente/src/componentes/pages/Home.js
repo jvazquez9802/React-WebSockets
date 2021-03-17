@@ -28,8 +28,9 @@ const Home = () => {
                   }),
               })
               const res = await response.json();
+              console.log(res)
               if(res && res.found){
-                  console.log(res)
+                localStorage.setItem('token', res.token)
                 history.push('/info')
 
             } else {
