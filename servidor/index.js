@@ -70,14 +70,22 @@ app.post("/signup", async(req, res) => {
     });
 });
 
-app.post("/signin", async (req, res) => {
+app.post("/login", async (req, res) => {
   try {
     const data = req.body
     let login = await pool.query(`SELECT * FROM usuario WHERE correo = '${data.email}'`);
     if(login.rowCount > 0){
       bcrypt.compare(data.password, login.rows[0].contraseña, (err, result) =>{
         if(result){
-          res.json({found:true, message:"Inicio de sesión exitoso"});
+          let qry = login.rows[0]
+          res.json({
+            found: true,
+            username: qry.nombre_usuario,
+            name: qry.nombre_completo,
+            curp: qry.curp,
+            rfc:qry.rfc,
+            phone:qry.telefono
+          });
         } else {
           res.json({found:false, message:"Contraseña incorrecta"});
         }

@@ -1,10 +1,17 @@
 import '../assets/stylesheets/header.css'
-
-import Button from './utils/Button'
 import logo from '../assets/images/logoCTC.png'
 import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const Header = () => {
+
+    let history = useHistory()
+
+    const logOut = () => {
+        console.log('Sesión cerrada')
+        history.push('/')
+    }
+    
     return (
            <nav className="navbar" role="navigation" aria-label="main navigation" style={{backgroundColor:"#ADC98B"}}>
                 <div id="navbarBasicExample" className="navbar-menu">
@@ -17,7 +24,7 @@ const Header = () => {
                     <div className="navbar-end">
                         <div className="navbar-item">
                             <div className="buttons">
-                               <Button url="/" text="Cerrar Sesión"/>
+                               <button className="button is-light" onClick={()=>{logOut()}}>Cerrar sesión</button>
                             </div>
                         </div>
                     </div>

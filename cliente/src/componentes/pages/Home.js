@@ -1,6 +1,7 @@
 import '../../assets/stylesheets/home.css'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 
 
@@ -9,11 +10,13 @@ const Home = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [loginStatus, setLoginStatus] = useState(false)
+
+    let history = useHistory()
     
     
     const logIn = async () => {
         try {
-            const response = await fetch('http://localhost:5000/signin', {
+            const response = await fetch('http://localhost:5000/login', {
                 method: 'POST',
                 headers: {
                   'Content-type': 'application/json',
@@ -24,9 +27,14 @@ const Home = () => {
                       password:password
                   }),
               })
-              const found = await response.json();
-              setLoginStatus(found.found)
-              console.log(found)
+              const res = await response.json();
+              if(res && res.found){
+                  console.log(res)
+                history.push('/info')
+
+            } else {
+                alert('Fallo al iniciar sesión')
+            }
 
         } catch (err) {
             console.log(err.message)
