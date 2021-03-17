@@ -25,13 +25,31 @@ const saltRounds = 10
 
 //Rutas para registros
 
-app.get("/registros", async(req, res) => {
-  try {
-    const allRegistros = await pool.query("SELECT * FROM (SELECT * FROM registro ORDER BY registro_id DESC LIMIT 24) AS QRY ORDER BY QRY.registro_id");
-    res.json(allRegistros.rows);
-  } catch (err) {
-    console.error(err.message);
+function verifyToken(req, res, next){
+  const bearerHeader = req.headers['authorization']
+
+  if(typeof bearerHeader !== 'undefined'){
+    const bearerToken = bearerHeader.split(" ")[1]
+    req.token = bearerToken
+    next()
+  } else {
+    res.sendStatus(403)
   }
+}
+
+app.get("/registros", verifyToken, async(req, res) => {
+  jwt.verify(req.token, 'secretkey',async (error, authData) => {
+    if(error){
+      res.sendStatus(403)
+    } else {
+      try {
+        const allRegistros = await pool.query("SELECT * FROM (SELECT * FROM registro ORDER BY registro_id DESC LIMIT 24) AS QRY ORDER BY QRY.registro_id");
+        res.json(allRegistros.rows);
+      } catch (err) {
+        res.sendStatus(403)
+      }
+    }
+  })
 });
 
 // Rutas para usuarios

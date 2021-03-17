@@ -10,6 +10,7 @@ const AppRoutes = () => {
 
     return(
         <App>
+            
             <Switch>
                 <Route exact path = '/' component = {Home} />
                 <Route exact path = '/registro' component = {SignUp} />

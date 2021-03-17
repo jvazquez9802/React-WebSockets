@@ -17,12 +17,20 @@ const Container = () => {
     
     const getData = async () => {
         try {
-            const response = await fetch("http://localhost:5000/registros");
+            const response = await fetch("http://localhost:5000/registros", {
+                method: 'GET',
+                headers: {
+                  'Content-type': 'application/json',
+                  'Accept': 'application/json',
+                  'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            })
             const jsonData = await response.json();
             console.log(jsonData)
             setData(jsonData);
             setCurrent(jsonData[jsonData.length - 1])
             //getMinMax(data)
+            console.log(response)
         } catch (err) {
             console.error(err.message)
         }

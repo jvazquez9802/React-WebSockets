@@ -3,13 +3,10 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
 
-
-
 const Home = () => {
     
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [loginStatus, setLoginStatus] = useState(false)
 
     let history = useHistory()
     
@@ -42,10 +39,11 @@ const Home = () => {
         }
     }
 
+    console.log(localStorage.getItem('token'))
     return (
         <div className="home-container">
             <div className="home-text">
-                <h1 className="home-header">Bienvenido {loginStatus}</h1>
+                <h1 className="home-header">Bienvenido</h1>
                 <p className="home-p1">Regístrate al STCC</p>
                 <p className="home-p2">Registrándote podrás visualizar las condiciones climatológicas de tu cultivo en tiempo real y recibirás notificaciones en caso de un posible riesgo. </p>
                 <Link className="btn-home-up" to="/registro">Regístrate</Link>
