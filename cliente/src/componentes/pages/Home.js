@@ -2,14 +2,18 @@ import '../../assets/stylesheets/home.css'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
+import { useAuth } from '../../AuthContext'
 
 const Home = () => {
     
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
-    let history = useHistory()
     
+    const { sigin } = useAuth()
+    const [error, setError] = useState(false)
+    const [loading, setLoading] = useState(false)
+    
+    let history = useHistory()
     
     const logIn = async () => {
         try {
@@ -27,19 +31,23 @@ const Home = () => {
               const res = await response.json();
               console.log(res)
               if(res && res.found){
-                localStorage.setItem('token', res.token)
-                history.push('/info')
-
+                try {
+                    setError('')
+                    setLoading(true)
+                    await sigin(email, password)
+                    history.push('/info')
+                } catch {
+                    setError('Fallo al iniciar sesion')
+                    console.log(error)
+                }
             } else {
                 alert('Fallo al iniciar sesión')
             }
 
-        } catch (err) {
-            console.log(err.message)
+        } catch {
+            setError('Fallo al iniciar sesion')
         }
     }
-
-    console.log(localStorage.getItem('token'))
     return (
         <div className="home-container">
             <div className="home-text">
@@ -68,7 +76,8 @@ const Home = () => {
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
-                        <a className="btn-form" onClick={() => logIn()}><strong>Iniciar Sesión</strong></a>
+                        
+                        <a disable={loading} className="btn-form" onClick={() => logIn()}><strong>Iniciar Sesión</strong></a>
                     </form>
                 </div>
             </div>

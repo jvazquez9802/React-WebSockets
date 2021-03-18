@@ -4,21 +4,20 @@ import PropTypes from 'prop-types';
 import Sidebar from './sidebar/Bar'
 import { useLocation } from 'react-router-dom'
 
-const Content = ({body}) => {
+const Content = ({children}) => {
 
     const location = useLocation()
     return (
         <div className="graph-content">
-            {location.pathname !=="/" && location.pathname !== "/registro" &&(
+            {location.pathname !=="/" && location.pathname !== "/registro" &&  location.pathname !== "/recuperar" &&(
                 <Sidebar />
             )}
-                {body}
+                {children}
         </div>
     )
 }
-
 Content.propTypes = {
-    body: PropTypes.object.isRequired
+    children: PropTypes.object.isRequired
 }
 
 export default Content;

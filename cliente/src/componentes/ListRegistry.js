@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 
 const ListRegistry = () => {
 
-    const [registros, setRegistros] = useState([]);
+    /*const [registros, setRegistros] = useState([]);
 
     const getRegystry = async () => {
         try {
@@ -19,40 +19,10 @@ const ListRegistry = () => {
         getRegystry();
     }, []);
 
-    console.log(registros);
+    console.log(registros); */
 
     return (
-        <Fragment>
-            {""}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Temperatura</th>
-                        <th>Humedad</th>
-                        <th>Viento</th>
-                        <th>Presión</th>
-                        <th>Radiación</th>
-                        <th>Precipitación</th>
-                        <th>Fecha y hora</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/*<tr>
-                    <td></td>
-                </tr> */}
-                    {registros.map(registro => (
-                        <tr key={registro.registro_id}>
-                            <td>{registro.temperatura}</td>
-                            <td>{registro.humedad}</td>
-                            <td>{registro.viento}</td>
-                            <td>{registro.presion}</td>
-                            <td>{registro.radiacion}</td>
-                            <td>{registro.fecha}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </Fragment>
+        <h1>Hola</h1>
     );
 };
 
