@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 import React from 'react'
 import socket from '../Socket'
 import Graph from './Graph'
-
-import { useLocation } from 'react-router-dom'
+import Table from './Table'
+import { useLocation, Link } from 'react-router-dom'
 
 const Container = () => {
 
@@ -59,6 +59,12 @@ const Container = () => {
     const location = useLocation()
     return (
         <div className="Graph-content">
+            {location.pathname !== "/info" &&(
+                <Link className='data-table-path' to='/info'>Tabla de registros</Link>
+            )}
+            {location.pathname === "/info" &&(
+                <Table data={data}/>
+            )}
            {location.pathname === "/info/temperatura" &&(
                <Graph 
                title="Temperatura" 
@@ -94,7 +100,7 @@ const Container = () => {
             )}
             {location.pathname === "/info/presion" &&(
                <Graph 
-                    title="presion" 
+                    title="Presion" 
                     registry={data} 
                     prop="presion" 
                     label="Hum" 
@@ -105,7 +111,7 @@ const Container = () => {
             )}
             {location.pathname === "/info/radiacion" &&(
                <Graph 
-                    title="radiacion" 
+                    title="Radiacion" 
                     registry={data} 
                     prop="radiacion" 
                     label="Hum" 
@@ -116,7 +122,7 @@ const Container = () => {
             )}
             {location.pathname === "/info/precipitacion" &&(
                <Graph 
-                    title="precipitacion" 
+                    title="Precipitacion" 
                     registry={data} 
                     prop="precipitacion" 
                     label="Hum" 

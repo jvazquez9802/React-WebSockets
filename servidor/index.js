@@ -35,7 +35,6 @@ app.post("/user/:uid", async(req, res) => {
       let update = await pool.query(`UPDATE users 
         SET
         username = '${req.body.name}',
-        useremail = '${req.body.email}',
         curp = '${req.body.curp}',
         rfc = '${req.body.rfc}',
         phone = '${req.body.phone}'
@@ -47,9 +46,9 @@ app.post("/user/:uid", async(req, res) => {
   } else {
     try{
       let newUser = await pool.query(`INSERT INTO users 
-      (userid, username, useremail, curp, rfc, phone)
+      (userid, username, curp, rfc, phone)
       VALUES 
-      ('${uid}', '${req.body.name}', '${req.body.email}', '${req.body.curp}', '${req.body.rfc}', '${req.body.phone}');`)
+      ('${uid}', '${req.body.name}', '${req.body.curp}', '${req.body.rfc}', '${req.body.phone}');`)
       res.json({success:true, message:'Data created'});
     } catch (err) {
       res.json({success: false, message: 'Something was wrong'})
@@ -60,8 +59,7 @@ app.post("/user/:uid", async(req, res) => {
 app.get("/user/:uid", async(req, res) => {
   try {
     const {uid} = req.params;
-    const user = await pool.query("SELECT username, useremail, curp, rfc, phone FROM users WHERE userid = $1", [uid]);
-    console.log(user.rowCount)
+    const user = await pool.query("SELECT username, curp, rfc, phone FROM users WHERE userid = $1", [uid]);
     user.rowCount <= 0 ? res.json({succes: true, found: false, user: null}) : res.json({succes: true, found: true, user: {
       username: user.rows[0].username,
       curp: user.rows[0].curp,

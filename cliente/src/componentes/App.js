@@ -7,7 +7,6 @@ import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import page404 from '../componentes/error/Page404'
 import Home from '../componentes/pages/Home'
 import SignUp from '../componentes/pages/SignUp'
-import list from '../componentes/ListRegistry'
 import Container from '../componentes/Graphs/Container'
 import Forgot from '../componentes/pages/Forgot'
 import Profile from '../componentes/user/profile'
@@ -30,7 +29,6 @@ const App = () => {
                     <RouteY exact path = '/registro' component = {SignUp} />
                     <RouteY exact path = '/recuperar' component = {Forgot} />
                     <RouteN exact path = '/perfil' component = {Profile} />
-                    <RouteN exact path = '/lista' component = {list} />
                     <RouteN exact path = '/info' component = {Container} />
                     <RouteN exact path = '/info/temperatura' component = {Container} />
                     <RouteN exact path = '/info/humedad' component = {Container} />

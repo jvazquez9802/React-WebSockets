@@ -82,3 +82,11 @@
   
     color: rgba(29, 27, 27, 0.659);
 }
+
+.signUp-to-signIn{
+    grid-column: 1 / 13;
+    grid-row: 8 / 9;
+    font-size: 13px;
+    text-align: center;
+    color: #6e7c7c;
+}

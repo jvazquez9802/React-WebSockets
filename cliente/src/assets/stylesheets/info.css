@@ -2,6 +2,7 @@
     grid-column: 4 / 13;
     grid-row: 1/13;
     display: grid;
+    max-height: 100vh;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(12, 1fr);
     padding-top: 3vh;
@@ -80,3 +81,7 @@ color: rgba(22, 29, 111, 0.8);
     color: rgba(145, 9, 30, 0.8);
 }
 
+.data-table-path{
+    grid-column:  10 / 12;
+    grid-row: 3/ 4;
+}

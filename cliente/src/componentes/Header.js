@@ -37,7 +37,20 @@ const Header = () => {
                         <div className="navbar-item">
                             <div className="buttons">
                                 {currentUser &&
-                                    <a className="button is-light" onClick={ () => handleLogOut()}>Cerrar sesión</a>
+                                    <div class="navbar-item has-dropdown is-hoverable" style={{marginRight:'3vw'}}>
+                                        <a class="navbar-link" style={{backgroundColor:"#ADC98B"}}>
+                                        Usuario
+                                        </a>
+                                        <div class="navbar-dropdown">
+                                            <Link class="navbar-item" to='/perfil'>
+                                                Perfil
+                                            </Link>
+                                            <hr class="navbar-divider"/>
+                                            <a class="navbar-item" onClick={ () => handleLogOut()}>
+                                                Cerrar Sesión
+                                            </a>
+                                        </div>
+                                    </div>
                                 } 
                             </div>
                         </div>

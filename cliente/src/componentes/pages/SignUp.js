@@ -1,6 +1,6 @@
 import '../../assets/stylesheets/signup.css'
 import { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../../AuthContext'
 
 const SignUp = () => {
@@ -67,6 +67,7 @@ const SignUp = () => {
                     required
                 />
                 <a disabled={loading} onClick={() => {handleSignUp()}} className="btn-form-signup"><strong>Regístrate</strong></a>
+                <Link className='signUp-to-signIn' to='/' >¿Ya tienes una cuenta? Inicia sesión</Link>
                 </form>
             </div>
         </div>
