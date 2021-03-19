@@ -1,0 +1,19 @@
+.table-content{
+    grid-column: 2 / 12;
+    grid-row: 1/13;
+    max-height: 100vh;
+    overflow-y: scroll;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    padding-top: 3vh;
+}
+
+.table-box{
+    grid-column: 1 / 13;
+    grid-row: 1/13;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    background-color: #ADC98B;
+}

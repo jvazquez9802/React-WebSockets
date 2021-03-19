@@ -17,7 +17,7 @@ const Graph = ({title, registry, prop, label, lastData, pmax, pmin}) => {
         }
     }, [registry])
 
-    if(registry.length == 0){
+    if(registry.length === 0){
         return <Spinner/>
     }
 

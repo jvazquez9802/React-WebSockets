@@ -1,5 +1,5 @@
 import '../../assets/stylesheets/spinner.css'
-import { BounceLoader, BarLoader, BeatLoader,  } from 'react-spinners'
+import { BeatLoader } from 'react-spinners'
 
 function Spinner() {
 

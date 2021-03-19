@@ -3,23 +3,20 @@ import { useEffect, useState } from 'react'
 import React from 'react'
 import socket from '../Socket'
 import Graph from './Graph'
-
-
-import { useLocation } from 'react-router-dom'
-
+import Table from './Table'
+import { useLocation, Link } from 'react-router-dom'
 
 const Container = () => {
 
     const [data, setData] = useState([])
     const [current, setCurrent] = useState({})
-    const [change, setChange] = useState([false])
+    const [change, ] = useState([false])
 
     
     const getData = async () => {
         try {
             const response = await fetch("http://localhost:5000/registros");
             const jsonData = await response.json();
-            console.log(jsonData)
             setData(jsonData);
             setCurrent(jsonData[jsonData.length - 1])
             //getMinMax(data)
@@ -54,15 +51,20 @@ const Container = () => {
 
    useEffect(() =>{
         socket.on('new: data', (c) =>{
-            console.log(c)
             getData()
         })
-    }, [data])
+    }, [])
 
 
     const location = useLocation()
     return (
         <div className="Graph-content">
+            {location.pathname !== "/info" &&(
+                <Link className='data-table-path' to='/info'>Tabla de registros</Link>
+            )}
+            {location.pathname === "/info" &&(
+                <Table data={data}/>
+            )}
            {location.pathname === "/info/temperatura" &&(
                <Graph 
                title="Temperatura" 
@@ -98,7 +100,7 @@ const Container = () => {
             )}
             {location.pathname === "/info/presion" &&(
                <Graph 
-                    title="presion" 
+                    title="Presion" 
                     registry={data} 
                     prop="presion" 
                     label="Hum" 
@@ -109,7 +111,7 @@ const Container = () => {
             )}
             {location.pathname === "/info/radiacion" &&(
                <Graph 
-                    title="radiacion" 
+                    title="Radiacion" 
                     registry={data} 
                     prop="radiacion" 
                     label="Hum" 
@@ -120,7 +122,7 @@ const Container = () => {
             )}
             {location.pathname === "/info/precipitacion" &&(
                <Graph 
-                    title="precipitacion" 
+                    title="Precipitacion" 
                     registry={data} 
                     prop="precipitacion" 
                     label="Hum" 

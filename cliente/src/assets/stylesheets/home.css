@@ -167,6 +167,7 @@
     line-height: 30px;
     border-radius: 5px;
     color: rgba(29, 27, 27, 0.659);
+    border: none;
   
   }
   
@@ -176,10 +177,19 @@
     background: #ADC98B;
     text-align: center;
     font-size: 13px;
+    font-weight: bolder;
     line-height: 30px;
     padding-top: 1mm;
     margin: 2mm;
     color: #000000;
     border-radius: 5px;
+  }
+
+  .forgot-pass{
+    grid-column: 1 / 13;
+    grid-row: 11 / 12;
+    font-size: 13px;
+    text-align: center;
+    color: #6e7c7c;
   }
   

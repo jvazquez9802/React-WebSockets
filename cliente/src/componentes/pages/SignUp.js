@@ -1,24 +1,73 @@
 import '../../assets/stylesheets/signup.css'
-
-import Input from '../utils/input'
-import Button from '../utils/Button'
+import { useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import { useAuth } from '../../AuthContext'
 
 const SignUp = () => {
+
+    const history = useHistory()
+    
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirm, setConfirm] = useState('')
+
+    const { signup } = useAuth()
+    const [error, setError] = useState(false)
+    const [loading, setLoading] = useState(false)
+
+    const handleSignUp = async () => {
+        if(password === confirm){
+            if(password.length < 6){
+                alert('La constraseña debe tener 6 o más caracteres')
+            } else {
+                try {
+                    setError('')
+                    setLoading(true)
+                    await signup(email, password)
+                    history.push('/')
+                } catch (err) {
+                    setError('Error al iniciar sesión')
+                }
+                setLoading(false)
+            }
+            
+        } else {
+            alert('Las contraseñas no coinciden')
+        }
+    }
+
     return (
         <div className="SignUp-content">
             <div className="SignUp-box">
                 <h1 className="SignUp-title">Forma parte del STCC</h1>
-                <form className="SignUp-form" method="POST" action="/"> 
-                <Input styleClass="in-user" type="text" placeholder="Usuario"/>
-                <Input styleClass="in-mail" type="mail" placeholder="Correo"/>
-                <Input styleClass="in-name" type="text" placeholder="Nombre"/>
-                <Input styleClass="in-curp" type="text" placeholder="CURP"/>
-                <Input styleClass="in-rfc" type="text" placeholder="RFC"/>
-                <Input styleClass="in-password" type="password" placeholder="Contraseña"/>
-                <Input styleClass="in-confirm-password" type="password" placeholder="Confirmar Contraseña"/>
-                <Input styleClass="in-phone" type="text" placeholder="Confirmar Contraseña"/>
-                <Button style="btn-form" url="/" text="Regístrate"/>
-                
+                {error && alert(error)}
+                <form className="SignUp-form"> 
+                <input 
+                    className="in-mail"
+                    type="mail"
+                    placeholder="Correo"
+                    autoComplete ="off"
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+                <input 
+                    className="in-password"
+                    type="password"
+                    placeholder="Contraseña"
+                    autoComplete ="off"
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+                <input 
+                    className="in-confirm-password"
+                    type="password"
+                    placeholder="Confirmar Contraseña"
+                    autoComplete ="off"
+                    onChange={(e) => setConfirm(e.target.value)}
+                    required
+                />
+                <a disabled={loading} onClick={() => {handleSignUp()}} className="btn-form-signup"><strong>Regístrate</strong></a>
+                <Link className='signUp-to-signIn' to='/' >¿Ya tienes una cuenta? Inicia sesión</Link>
                 </form>
             </div>
         </div>
