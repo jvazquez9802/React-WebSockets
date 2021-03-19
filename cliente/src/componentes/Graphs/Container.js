@@ -4,9 +4,7 @@ import React from 'react'
 import socket from '../Socket'
 import Graph from './Graph'
 
-
 import { useLocation } from 'react-router-dom'
-
 
 const Container = () => {
 
@@ -19,7 +17,6 @@ const Container = () => {
         try {
             const response = await fetch("http://localhost:5000/registros");
             const jsonData = await response.json();
-            console.log(jsonData)
             setData(jsonData);
             setCurrent(jsonData[jsonData.length - 1])
             //getMinMax(data)
@@ -54,7 +51,6 @@ const Container = () => {
 
    useEffect(() =>{
         socket.on('new: data', (c) =>{
-            console.log(c)
             getData()
         })
     }, [])

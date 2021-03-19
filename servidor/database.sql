@@ -15,18 +15,15 @@ CREATE TABLE registro(
     precipitacion float4
 );
 
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
-CREATE TABLE usuario (
-    usuario_id uuid DEFAULT uuid_generate_v4 (),
-    nombre_usuario VARCHAR NOT NULL UNIQUE,
-    nombre_completo VARCHAR NOT NULL,
-    correo VARCHAR NOT NULL UNIQUE,
-    CURP VARCHAR NOT NULL UNIQUE,
-    RFC VARCHAR NOT NULL UNIQUE,
-    contraseña VARCHAR NOT NULL,
-    telefono VARCHAR NOT NULL UNIQUE,
-    PRIMARY KEY (usuario_id)
+CREATE TABLE users (
+    userId VARCHAR NOT NULL UNIQUE,
+    userName VARCHAR NOT NULL UNIQUE DEFAULT '',
+    userEmail VARCHAR NOT NULL UNIQUE DEFAULT '',
+    CURP VARCHAR NOT NULL UNIQUE DEFAULT '',
+    RFC VARCHAR NOT NULL UNIQUE DEFAULT '',
+    phone VARCHAR NOT NULL UNIQUE DEFAULT '',
+    PRIMARY KEY (userId)
 );
 
 INSERT INTO usuario (

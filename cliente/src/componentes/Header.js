@@ -12,7 +12,7 @@ const Header = () => {
     const { currentUser, logout } = useAuth()
     const history = useHistory()
 
-    const signout = async () => {
+    const handleLogOut = async () => {
         setError('')
         try {
             await logout()
@@ -37,7 +37,7 @@ const Header = () => {
                         <div className="navbar-item">
                             <div className="buttons">
                                 {currentUser &&
-                                    <a className="button is-light" onClick={ () => signout()}>Cerrar sesión</a>
+                                    <a className="button is-light" onClick={ () => handleLogOut()}>Cerrar sesión</a>
                                 } 
                             </div>
                         </div>

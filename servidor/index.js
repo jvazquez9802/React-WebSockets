@@ -6,22 +6,17 @@ const servidor = http.createServer(app);
 const cors = require("cors");
 const pool = require("./db");
 const socketio = require("socket.io");
-const { json } = require("express");
 const io = socketio(servidor, {
   transports: ['websocket', 'polling']
 });
 
 app.use(cors());
-app.use(express.json()); 
-
-const bcrypt = require("bcrypt");
-const saltRounds = 10
+app.use(express.json());
 
 
 app.get("/registros", async(req, res) => {
   try {
     const allRegistros = await pool.query("SELECT * FROM (SELECT * FROM registro ORDER BY registro_id DESC LIMIT 24) AS QRY ORDER BY QRY.registro_id");
-    console.log(allRegistros)
     res.json(allRegistros.rows);
   } catch (err) {
     console.error(err.message);
@@ -30,67 +25,51 @@ app.get("/registros", async(req, res) => {
 
 // Rutas para usuarios
 
-app.get("/usuarios", async(req, res) => {
-  try {
-    const allRegistros = await pool.query("SELECT * FROM usuario");
-    res.json(allRegistros.rows);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
+app.post("/user/:uid", async(req, res) => {
 
-app.get("/usuarios/:id", async(req, res) => {
-  try {
-    const {id} = req.params;
-    const registro = await pool.query("SELECT * FROM usuario WHERE usuario_id = $1", [id]);
+  const {uid} = req.params;
+  const existe = await pool.query("SELECT * FROM users WHERE userid = $1", [uid]);
 
-    res.json(registro.rows[0]);
-
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-app.post("/signup", async(req, res) => {
-    const data = req.body
-    const bcPass = data.password
-    bcrypt.hash(bcPass, saltRounds, async(err, hash) => {
-      if(err){
-        res.json({error: err});
-      }
-      let newUser = await pool.query(`INSERT INTO usuario 
-      (nombre_usuario, nombre_completo, correo, curp, rfc, contraseña, telefono)
-      VALUES 
-      ('${data.username}', '${data.fullName}', '${data.email}', '${data.curp}', '${data.rfc}', '${hash}', '${data.phone}');`)
-      .then(() =>{
-          console.log("Registrado")
-        }
-      );
-    });
-    res.json({success: true, message:'Exito en el registro'});
-});
-
-app.post("/login", async (req, res) => {
-  try {
-    const data = req.body
-    let login = await pool.query(`SELECT * FROM usuario WHERE correo = '${data.email}'`);
-    if(login.rowCount > 0){
-      bcrypt.compare(data.password, login.rows[0].contraseña, (err, result) =>{
-        if(result){
-          console.log('AQUI PASA <=====')
-          res.json({found: true, message: 'Inicio de sesion exitoso'});
-        } else {
-          res.json({found:false, message:"Contraseña incorrecta"});
-        }
-        if(err){
-          console.log(err)
-        }
-      });
-    } else {
-      res.json({found:false, message:"Correo electrónico incorrecto"});
+  if (existe.rowCount > 0){
+    try {
+      let update = await pool.query(`UPDATE users 
+        SET
+        username = '${req.body.name}',
+        useremail = '${req.body.email}',
+        curp = '${req.body.curp}',
+        rfc = '${req.body.rfc}',
+        phone = '${req.body.phone}'
+        WHERE userid = '${uid}';`)
+        res.json({success:true, message:'Data updated'});
+    } catch (error) {
+      res.json({success: false, message: 'Something was wrong'})
     }
+  } else {
+    try{
+      let newUser = await pool.query(`INSERT INTO users 
+      (userid, username, useremail, curp, rfc, phone)
+      VALUES 
+      ('${uid}', '${req.body.name}', '${req.body.email}', '${req.body.curp}', '${req.body.rfc}', '${req.body.phone}');`)
+      res.json({success:true, message:'Data created'});
+    } catch (err) {
+      res.json({success: false, message: 'Something was wrong'})
+    }
+  }
+});
+
+app.get("/user/:uid", async(req, res) => {
+  try {
+    const {uid} = req.params;
+    const user = await pool.query("SELECT username, useremail, curp, rfc, phone FROM users WHERE userid = $1", [uid]);
+    console.log(user.rowCount)
+    user.rowCount <= 0 ? res.json({succes: true, found: false, user: null}) : res.json({succes: true, found: true, user: {
+      username: user.rows[0].username,
+      curp: user.rows[0].curp,
+      rfc: user.rows[0].rfc,
+      phone: user.rows[0].phone
+    }})
   } catch (err) {
-    res.json({err:err});
+    res.json({success: false, message: 'Something was wrong'})
   }
 });
 

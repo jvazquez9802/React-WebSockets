@@ -10,7 +10,10 @@ import SignUp from '../componentes/pages/SignUp'
 import list from '../componentes/ListRegistry'
 import Container from '../componentes/Graphs/Container'
 import Forgot from '../componentes/pages/Forgot'
+import Profile from '../componentes/user/profile'
+
 import { AuthProvider } from '../AuthContext'
+import {PrivateRouteNotCurrent as RouteN, PrivateRouteCurrent as RouteY } from '../PrivateRoute'
 
 const App = () => {
     return (
@@ -23,17 +26,18 @@ const App = () => {
               <div className="body-content">
                 <Content>
                   <Switch>
-                    <Route exact path = '/' component = {Home} />
-                    <Route exact path = '/registro' component = {SignUp} />
-                    <Route exact path = '/recuperar' component = {Forgot} />
-                    <Route exact path = '/lista' component = {list} />
-                    <Route exact path = '/info' component = {Container} />
-                    <Route exact path = '/info/temperatura' component = {Container} />
-                    <Route exact path = '/info/humedad' component = {Container} />
-                    <Route exact path = '/info/viento' component = {Container} />
-                    <Route exact path = '/info/presion' component = {Container} />
-                    <Route exact path = '/info/radiacion' component = {Container} />
-                    <Route exact path = '/info/precipitacion' component = {Container} />
+                    <RouteY exact path = '/' component = {Home} />
+                    <RouteY exact path = '/registro' component = {SignUp} />
+                    <RouteY exact path = '/recuperar' component = {Forgot} />
+                    <RouteN exact path = '/perfil' component = {Profile} />
+                    <RouteN exact path = '/lista' component = {list} />
+                    <RouteN exact path = '/info' component = {Container} />
+                    <RouteN exact path = '/info/temperatura' component = {Container} />
+                    <RouteN exact path = '/info/humedad' component = {Container} />
+                    <RouteN exact path = '/info/viento' component = {Container} />
+                    <RouteN exact path = '/info/presion' component = {Container} />
+                    <RouteN exact path = '/info/radiacion' component = {Container} />
+                    <RouteN exact path = '/info/precipitacion' component = {Container} />
                     <Route component = {page404} />
                   </Switch>
                 </Content>

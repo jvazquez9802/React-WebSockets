@@ -1,4 +1,4 @@
-.SignUp-content{
+.profile-content{
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(12, 1fr);
@@ -9,7 +9,7 @@
     background-size: cover;
 }
 
-.SignUp-box{
+.profile-box{
     grid-column: 4 / 10;
     grid-row: 3 / 11;
     background: rgba(173, 201, 139, 0.8);
@@ -20,9 +20,9 @@
 
 }
 
-.SignUp-title{
+.profile-title{
     text-align: center;
-    grid-column: 2 / 12;
+    grid-column: 1 / 13;
     grid-row: 3 / 4;
     font-style: normal;
     font-weight: bold;
@@ -30,7 +30,7 @@
     color: black;
 }
 
-.SignUp-form{
+.profile-form{
     grid-column: 2 / 12;
     grid-row: 4 / 12;
     display: grid;
@@ -40,7 +40,7 @@
     overflow: hidden;
 }
 
-.SignUp-form >input{
+.profile-form >input{
     background: inherit;
     background: transparent;
     border: none;
@@ -49,30 +49,34 @@
     outline: none;
 }
 
-.SignUp-form >input::placeholder{
+.profile-form >input::placeholder{
     color: #1e212d;
 }
 
-.SignUp-form >input:-webkit-autofill {
+.profile-form >input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px rgba(173, 201, 139, 0.8) inset;
 }
 
-.in-mail{
+.in-name{
     grid-column: 2 / 12;
     grid-row: 2 / 3;
 }
-.in-password{
-    grid-column: 2 / 6;
+.in-curp{
+    grid-column: 2 / 12;
+    grid-row: 3 / 4;
+}
+.in-rfc{
+    grid-column: 2 / 12;
     grid-row: 4 / 5;
 }
-.in-confirm-password{
-    grid-column: 7 / 12;
-    grid-row: 4 / 5;
+.in-phone{
+    grid-column: 2 / 12;
+    grid-row: 5 / 6;
 }
 
-.btn-form-signup {
+.btn-form-profile {
     grid-column: 8 / 12;
-    grid-row: 6 / 7;
+    grid-row: 7 / 8;
     background: #F4F9F9;
     font-weight: bold;
     text-align: center;

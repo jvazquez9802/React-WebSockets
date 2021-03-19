@@ -1,29 +1,24 @@
-import '../../assets/stylesheets/home.css'
-import React from 'react'
-import { useState, useEffect } from 'react'
+import '../../assets/stylesheets/resetPassword.css'
+import React, { useState } from 'react'
+
 
 const Forgot = () => {
 
-    const [email, setEmail] = useState([])
-
-    const resetPassword = () => {
-        console.log("Restablecer pass")
-    }
-
+    const [email, setEmail] = useState('')
     return (
-        <div className="home-box">
-                <div className="signin-box">
-                    <h1 className="signin-box-header">Recupera tu contraseña</h1>
-                    <form className="home-form">
+        <div className="container">
+                <div className="reset-box">
+                    <h1 className="reset-box-header">Recupera tu contraseña</h1>
+                    <form className="reset-form">
                         <input 
-                            className="data-in1"
+                            className="data-res"
                             type="text"
                             placeholder="Correo Electrónico"
                             autoComplete="off"
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
-                        <a className="btn-form" onClick={() => resetPassword()}><strong>Recuperar</strong></a>
+                        <a className="btn-form-res" onClick={() => {console.log('reset pass')}}><strong>Recuperar</strong></a>
                     </form>
                 </div>
             </div>

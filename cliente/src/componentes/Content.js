@@ -6,10 +6,10 @@ import { useLocation } from 'react-router-dom'
 
 const Content = ({children}) => {
 
-    const location = useLocation()
+    const lc = useLocation()
     return (
         <div className="graph-content">
-            {location.pathname !=="/" && location.pathname !== "/registro" &&  location.pathname !== "/recuperar" &&(
+            {lc.pathname !=="/" && lc.pathname !== "/registro" &&  lc.pathname !== "/recuperar" && lc.pathname !== "/perfil" &&(
                 <Sidebar />
             )}
                 {children}
