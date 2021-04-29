@@ -5,7 +5,6 @@ import socket from '../Socket'
 import Graph from './Graph'
 import Table from './Table'
 import { useLocation, Link } from 'react-router-dom'
-import { array } from 'prop-types'
 
 const Container = () => {
 
@@ -44,17 +43,15 @@ const Container = () => {
         });
         return tmin
     }
-    
+
     useEffect(() => {
-       getData()
-    }, [change])
+        getData()
+    }, [change]);
 
     useEffect(() =>{
             socket.on('new: data', (c) =>{
-            console.log(c)
             getData()
-            
-            //setData(currentData => [...currentData, c]);
+
         })
     }, []);
     

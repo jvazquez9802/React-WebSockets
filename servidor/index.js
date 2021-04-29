@@ -16,23 +16,19 @@ app.use(express.json());
 const getData = async () => {
   return await pool.query("SELECT * FROM (SELECT * FROM registro ORDER BY registro_id DESC LIMIT 24) AS QRY ORDER BY QRY.registro_id");
 }
-io.on('connection', client => {
 
-  app.post("/registros/nuevo", async (req, res) => {
-    try {
-      let insertar = await pool.query(`INSERT INTO registro 
-      (fecha, hora, temperatura, presion, humedad, viento, viento_max, radiacion, precipitacion)
-      VALUES 
-      ('${req.body.fecha}', '${req.body.hora}', ${req.body.temperatura}, ${req.body.presion}, ${req.body.humedad}, ${req.body.viento}, ${req.body.viento_max}, ${req.body.radiacion}, ${req.body.precipitacion});`).then(() => { client.emit('new: data', req.body) });
-      console.log(req.body)
-      res.json({ message: "Recibido" });
-    } catch (err) {
-      console.error(err.message);
-    }
-  });
+app.post("/registros/nuevo", async (req, res) => {
+  try {
+    let insertar = await pool.query(`INSERT INTO registro
+    (fecha, hora, temperatura, presion, humedad, viento, viento_max, radiacion, precipitacion)
+    VALUES 
+    ('${req.body.fecha}', '${req.body.hora}', ${req.body.temperatura}, ${req.body.presion}, ${req.body.humedad}, ${req.body.viento}, ${req.body.viento_max}, ${req.body.radiacion}, ${req.body.precipitacion});`)
+    io.emit('new: data', 'Actualizado')
+    res.sendStatus(204)
+  } catch (err) {
+    res.sendStatus(500)
+  }
 });
-
-
 
 app.get("/registros", async (req, res) => {
   try {
