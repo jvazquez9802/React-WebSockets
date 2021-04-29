@@ -26,6 +26,17 @@ CREATE TABLE users (
     PRIMARY KEY (userId)
 );
 
+insert into registro(
+    temperatura,
+	presion,
+    humedad,
+    viento,
+	viento_max,
+    radiacion,
+    precipitacion
+) values 
+(35, 11, 14, 9, 12, 6, 21)
+
 INSERT INTO usuario (
     nombre_usuario,
     nombre_completo,

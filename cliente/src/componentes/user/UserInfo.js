@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useAuth } from '../../AuthContext'
 
-const UserInfo = (setError) => {
+const UserInfo = ({setError}) => {
 
     const { currentUser } = useAuth()
     
@@ -62,7 +62,7 @@ const UserInfo = (setError) => {
 
     useEffect(() => {
         getData()
-    })
+    }, [])
 
     return (
         <div className="profile-box">

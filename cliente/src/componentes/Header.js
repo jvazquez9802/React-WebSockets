@@ -37,16 +37,19 @@ const Header = () => {
                         <div className="navbar-item">
                             <div className="buttons">
                                 {currentUser &&
-                                    <div class="navbar-item has-dropdown is-hoverable" style={{marginRight:'3vw'}}>
-                                        <a class="navbar-link" style={{backgroundColor:"#ADC98B"}}>
+                                    <div className="navbar-item has-dropdown is-hoverable" style={{marginRight:'3vw'}}>
+                                        <a className="navbar-link" style={{backgroundColor:"#ADC98B"}}>
                                         Usuario
                                         </a>
-                                        <div class="navbar-dropdown">
-                                            <Link class="navbar-item" to='/perfil'>
+                                        <div className="navbar-dropdown">
+                                            <Link className="navbar-item" to='/perfil'>
                                                 Perfil
                                             </Link>
-                                            <hr class="navbar-divider"/>
-                                            <a class="navbar-item" onClick={ () => handleLogOut()}>
+                                            <Link className="navbar-item" to='/info'>
+                                                Reportes
+                                            </Link>
+                                            <hr className="navbar-divider"/>
+                                            <a className="navbar-item" onClick={ () => handleLogOut()}>
                                                 Cerrar Sesión
                                             </a>
                                         </div>

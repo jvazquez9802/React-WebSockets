@@ -1,0 +1,28 @@
+<button onclick="saveData()">Post</button>
+
+<script>
+const saveData = async () => {
+        try {
+            const response = await fetch(`http://localhost:5000/registros/nuevo`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+                body: JSON.stringify({
+                    fecha: '01-05-2021',
+                    hora: '10:20',
+                    temperatura:  Math.random() * 45 + 1,
+                    presion:  Math.random() * 20 + 1,
+                    humedad:  Math.random() * 20 + 1,
+                    viento:  Math.random() + 1,
+                    viento_max:  Math.random() * 15 + 1,
+                    radiacion: Math.random() * 10 + 1,
+                    precipitacion: Math.random() * 10 + 1
+                }),
+            })
+        } catch {
+            setError('Fallo al guardar el registro')
+        }
+    }
+</script>

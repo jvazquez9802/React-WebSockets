@@ -10,7 +10,7 @@ const Profile = () => {
     return (
         <div className="profile-content">
             <UserInfo setError={setError}/>
-            <SessionInfo setError={setError}/>
+            <SessionInfo/>
         </div>
     )
 }

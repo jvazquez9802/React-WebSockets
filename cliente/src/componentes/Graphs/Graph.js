@@ -30,7 +30,7 @@ const Graph = ({title, registry, prop, label, lastData, pmax, pmin}) => {
             <div className="Graph-box">
                 <div className="Graph-inner-box">
                 <LineChart className="Graph" width={800} height={370} data={registry}>
-                    <XAxis dataKey="time" angle={-90} dy={10}/>
+                    <XAxis dataKey="time" angle={-90} dy={10} interval={0} />
                     <YAxis 
                         yAxisId={2} 
                         label={{ value: label, angle: -90, tickMargin: 20 }} 

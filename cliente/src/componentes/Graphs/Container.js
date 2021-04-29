@@ -5,12 +5,13 @@ import socket from '../Socket'
 import Graph from './Graph'
 import Table from './Table'
 import { useLocation, Link } from 'react-router-dom'
+import { array } from 'prop-types'
 
 const Container = () => {
 
     const [data, setData] = useState([])
     const [current, setCurrent] = useState({})
-    const [change, ] = useState([false])
+    const [change, setChange] = useState(false)
 
     
     const getData = async () => {
@@ -19,7 +20,6 @@ const Container = () => {
             const jsonData = await response.json();
             setData(jsonData);
             setCurrent(jsonData[jsonData.length - 1])
-            //getMinMax(data)
         } catch (err) {
             console.error(err.message)
         }
@@ -46,15 +46,18 @@ const Container = () => {
     }
     
     useEffect(() => {
-        getData()
+       getData()
     }, [change])
 
-   useEffect(() =>{
-        socket.on('new: data', (c) =>{
+    useEffect(() =>{
+            socket.on('new: data', (c) =>{
+            console.log(c)
             getData()
+            
+            //setData(currentData => [...currentData, c]);
         })
-    }, [])
-
+    }, []);
+    
 
     const location = useLocation()
     return (
@@ -63,7 +66,7 @@ const Container = () => {
                 <Link className='data-table-path' to='/info'>Tabla de registros</Link>
             )}
             {location.pathname === "/info" &&(
-                <Table data={data}/>
+                <Table/>
             )}
            {location.pathname === "/info/temperatura" &&(
                <Graph 
