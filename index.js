@@ -12,7 +12,7 @@ const io = socketio(server, {
   transports: ['websocket', 'polling']
 });
 
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(express.static(path.resolve(__dirname, './client/build')));
 app.use(cors());
 app.use(express.json());
 
