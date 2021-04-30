@@ -1,17 +1,21 @@
-//Servidor con express
+const PORT =process.env.PORT || 5000;
+const path = require('path');
+
 const express = require("express");
 const http = require("http");
 const app = express();
-const servidor = http.createServer(app);
+const server = http.createServer(app);
 const cors = require("cors");
 const pool = require("./db");
 const socketio = require("socket.io");
-const io = socketio(servidor, {
+const io = socketio(server, {
   transports: ['websocket', 'polling']
 });
 
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.use(cors());
 app.use(express.json());
+
 
 const getData = async () => {
   return await pool.query("SELECT * FROM (SELECT * FROM registro ORDER BY registro_id DESC LIMIT 24) AS QRY ORDER BY QRY.registro_id");
@@ -19,7 +23,7 @@ const getData = async () => {
 
 app.post("/registros/nuevo", async (req, res) => {
   try {
-    let insertar = await pool.query(`INSERT INTO registro
+    let insert = await pool.query(`INSERT INTO registro
     (fecha, hora, temperatura, presion, humedad, viento, viento_max, radiacion, precipitacion)
     VALUES 
     ('${req.body.fecha}', '${req.body.hora}', ${req.body.temperatura}, ${req.body.presion}, ${req.body.humedad}, ${req.body.viento}, ${req.body.viento_max}, ${req.body.radiacion}, ${req.body.precipitacion});`)
@@ -102,6 +106,8 @@ app.get("/user/:uid", async (req, res) => {
 
 
 
-servidor.listen(5000, () => console.log("Servidor inicializado"));
+server.listen(PORT, () => {
+  console.log(`Server listening on ${PORT}`);
+});
 
 
